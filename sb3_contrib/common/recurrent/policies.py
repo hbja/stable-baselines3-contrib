@@ -200,8 +200,8 @@ class RecurrentActorCriticPolicy(ActorCriticPolicy):
                 features.unsqueeze(dim=0),
                 (
                     # Reset the states at the beginning of a new episode
-                    (1.0 - episode_start).view(1, n_seq, 1) * lstm_states[0],
-                    (1.0 - episode_start).view(1, n_seq, 1) * lstm_states[1],
+                    np.logical_not(episode_start).view(1, n_seq, 1) * lstm_states[0],
+                    np.logical_not(episode_start).view(1, n_seq, 1) * lstm_states[1],
                 ),
             )
             lstm_output += [hidden]
