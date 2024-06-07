@@ -3,25 +3,30 @@
 Changelog
 ==========
 
-Release 2.3.0a1 (WIP)
+Release 2.3.0 (2024-03-31)
 --------------------------
+
+**New defaults hyperparameters for QR-DQN**
 
 Breaking Changes:
 ^^^^^^^^^^^^^^^^^
 - Upgraded to Stable-Baselines3 >= 2.3.0
-- The default ``leanrning_starts`` parameter of ``QRDQN`` have been changed to be consistent with the other offpolicy algorithms
+- The default ``learning_starts`` parameter of ``QRDQN`` have been changed to be consistent with the other offpolicy algorithms
 
 
 .. code-block:: python
 
   # SB3 < 2.3.0 default hyperparameters, 50_000 corresponded to Atari defaults hyperparameters
-  # model = QRDQN("MlpPolicy", env, learning_start=50_000)
+  # model = QRDQN("MlpPolicy", env, learning_starts=50_000)
   # SB3 >= 2.3.0:
-  model = QRDQN("MlpPolicy", env, learning_start=100)
+  model = QRDQN("MlpPolicy", env, learning_starts=100)
 
 
 New Features:
 ^^^^^^^^^^^^^
+- Added ``rollout_buffer_class`` and ``rollout_buffer_kwargs`` arguments to MaskablePPO
+- Log success rate ``rollout/success_rate`` when available for on policy algorithms
+
 
 Bug Fixes:
 ^^^^^^^^^^
@@ -31,8 +36,10 @@ Deprecations:
 
 Others:
 ^^^^^^^
-
 - Fixed ``train_freq`` type annotation for tqc and qrdqn (@Armandpl)
+- Fixed ``sb3_contrib/common/maskable/*.py`` type annotations
+- Fixed ``sb3_contrib/ppo_mask/ppo_mask.py`` type annotations
+- Fixed ``sb3_contrib/common/vec_env/async_eval.py`` type annotations
 
 Documentation:
 ^^^^^^^^^^^^^^
